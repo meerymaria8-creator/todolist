@@ -44,8 +44,10 @@
 				margin-left: 5px; 
 				color: white; 
 			}
-			.btn-complete { background-color: #86efac; color: #065f46 !important; }
-
+			.btn-complete { background-color: #efd686ff; color: #000000ff ; text-decoration:linethrough;}
+			.btn-uncomp { background-color: #86efbeff; color: #000000ff ; }
+			.btn-update { background-color: #3b82f6; } 
+    		.btn-delete { background-color: #ef4444; } 
 
 		</style>
 	</head>
@@ -54,31 +56,53 @@
 		<div class="header">
 			<h1>Focus Board</h1>
 			<p>"Great things start here"</p>
-			<a href="create.php" class="add-btn">Add +</a>
+			<a href="create.php" class="add-btn">Add+</a>
 		</div>
+
+		<?php
+			require "Database.php";
+
+			// التأكد من الاتصال
+			if (!$connect) {
+				die("Connection failed: " . mysqli_connect_error());
+			}
+
+			// تنفيذ الاستعلام
+			$result = mysqli_query($connect, "SELECT * FROM tasks");
+			if (!$result) {
+				die("Query failed: " . mysqli_error($connect));
+			}
+
+			// المرور على الصفوف
+			while ($row = mysqli_fetch_assoc($result)) {
+				$completedClass = ($row['status'] === 'true') ? 'completed-title' : '';
+				$toggleText = ($row['status'] === 'true') ? 'Uncomplete' : 'Complete';
+		?>
+
 		
 		<div class="todo-item">
-			<span class="todo-title"></span>
+			<span class="todo-title  <?php echo $completedClass; ?>" >
+				<?php echo htmlspecialchars($row['title']); ?>
+				<!--يعرض لي اسم المهمة من قاعدة البيانات بيجيبه-->
+			</span>
 			<!--اسم المهمة الي لازم يتم انجازها المستخدم بيدخلها من كرييت بيج-->
 			<div class="a">
-				<button class="btn-complete">Complete</button>
 				<!--لما تكون المهمة مكتمله تصير مشطوب عليها-->
-				<a href="update.php?id=1"><button class="btn-update">Update</button></a>
+				<a href="Toggle.php?id=<?php echo $row['id']; ?>">
+					<button class="<?php echo ($row['status'] === 'true') ? 'btn-complete' : 'btn-complete btn-uncomp'; ?>">
+						<?php echo $toggleText; ?>
+					</button>
+				</a>
+				<a href="update.php?id=<?php echo $row['id']; ?>">
+					<button class="btn-update">Update</button></a>
 				<!--ينقلني لصفحة الابديت لو  ضغط عليه-->
-				<button class="btn-delete">Delete</button>
+				<a href="Delete.php?id=<?php echo $row['id']; ?>">
+					<button class="btn-delete">Delete</button>
+				</a>
 				<!--يحذف المهمة لو ضغط عليه المستخدم-->
 			</div>
 		</div>
-		<!--مهمات مكتملة-->
-		<div class="todo-item">
-			<span class="todo-title completed-title"></span>
-			<div class="a">
-				<button class="btn-uncomplete">Uncomplete</button>
-				<a href="update.php?id=2"><button class="btn-update">Update</button></a>
-				<button class="btn-delete">Delete</button>
-			</div>
-		</div>
-
+	<?php } ?>
 		
 	</body>
 </html>

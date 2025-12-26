@@ -13,11 +13,14 @@
 				margin: 0; 
 			}
 			.card { 
+				display: block;
+				width: 100%;
 				text-align: center; 
 				border: 1px solid #ddd; 
 				padding: 40px; 
-				border-radius: 10px; 
-				width: 400px; 
+				margin-bottom:20px;
+				border-radius: 5px; 
+				box-sizing:border-box; 
 			}
 			.update-btn { 
 				background-color: #bfdbfe; 
@@ -26,18 +29,43 @@
 				border-radius: 5px; 
 				color: #1e40af;
 			}
+			
 
 
 		</style>
 	</head>
 	<body>
+		<?php
+		require "Database.php";
+
+		// تأكد من وجود id في الرابط
+		if (isset($_GET['id'])) {
+			$id = $_GET['id'];
+
+			// جلب بيانات المهمة من قاعدة البيانات
+			$result = mysqli_query($connect, "SELECT * FROM tasks WHERE id=$id");
+			$task = mysqli_fetch_assoc($result);
+
+			if (!$task) {
+				// إذا ما موجودة المهمة
+				die("Task not found!");
+			}
+		} else {
+			die("No task id provided!");
+		}
+		?>
+
 		<div class="card">
 			<h1>Update "to do"</h1>
-			<input type="text" value="display the current title">
-			<!--هون بس موقت القيمة -->
-			<br>
-			<button class="update-btn">update</button>
-			<!--مبدئيا هو هيك بعدنين حنغير عليه ويصير يعدل في قاعدةالبيانات-->
+			<form method="POST" action="update_action.php">
+			<!---postالقيم ما بتطلع بال urlاكثر امان -->
+				<input type="hidden" name="id" value="<?php echo $task['id']; ?>">
+				
+				<input type="text" name="title" value="<?php echo htmlspecialchars( $task['title']); ?>">
+				
+				<button class="update-btn" type="submit">Update</button>
+				<!--لما ارسل البيانات تروح لملف الupdate_action.php يعدل الid واسم المهمة هناك-->
+			</form>
 		</div>
 
 	</body>

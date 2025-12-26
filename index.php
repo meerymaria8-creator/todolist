@@ -31,7 +31,7 @@
 	<body>
 	
 		<div class="container">
-        <h1>turn your goals into achievements</h1>
+        <h1>Turn Your Goals Into Achievements</h1>
         <a href="list.php"><button class="btn">Lets Get To Work..</button></a>
 		</div>
 		

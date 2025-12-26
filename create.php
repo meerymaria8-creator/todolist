@@ -42,10 +42,12 @@
 	<body>
 		<div class="card">
 			<h1>Add "to do"</h1>
-			<textarea placeholder="what are u have to do"></textarea>
-			<br>
-			<button class="add-btn">Add +</button>
-			<!--لما اضغط عليه تتخزن في قاعدة البيانات-->
+			<form method="POST" action="Store.php">
+				<textarea name="title" placeholder="what are u have to do"></textarea>
+				<br>
+				<button type="submit" name="submit" class="add-btn">Add +</button>
+				<!--لما اضغط عليه تتخزن في قاعدة البيانات-->
+			</form>
 		</div>
 
 	</body>
