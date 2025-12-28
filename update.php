@@ -1,8 +1,13 @@
+<?php
+include "config.php";
+?>
+
 <!DOCTYPE html>
 <html>
 	<head>
 		<meta charset="utf-8">
 		<title>Lists</title>
+		<link rel="stylesheet" href="style.css">
 		<style type="text/css">
 			body { 
 				font-family: sans-serif; 
@@ -34,7 +39,7 @@
 
 		</style>
 	</head>
-	<body>
+	<body class="<?= $theme ?> <?= $font ?>">
 		<?php
 		require "Database.php";
 

@@ -1,8 +1,13 @@
+<?php
+include "config.php";
+?>
+
 <!DOCTYPE html>
 <html>
-	<head>
+	<head >
 		<meta charset="utf-8">
 		<title>Lists</title>
+		<link rel="stylesheet" href="style.css">
 		<style type="text/css">
 			body { 
 				display: flex; 
@@ -39,7 +44,7 @@
 			/*add button*/
 		</style>
 	</head>
-	<body>
+	<body <body class="<?= $theme ?> <?= $font ?>">>
 		<div class="card">
 			<h1>Add "to do"</h1>
 			<form method="POST" action="Store.php">

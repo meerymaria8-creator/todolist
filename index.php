@@ -1,11 +1,17 @@
+<?php
+include "config.php";
+?>
+
+
 <!DOCTYPE html>
 <html>
-	<head>
+	<head >
 		<meta charset="utf-8">
 		<title>To Do List</title>
+		<link rel="stylesheet" href="style.css">
 		<style type="text/css">
 			body{margin:0; padding:0; display:flex; justify-content:center;
-				align-items:center; height:100vh; background-color: #ffffff;
+				align-items:center; height:100vh; 
 			}
 			
 			.container {text-align: center;}
@@ -28,7 +34,7 @@
             background-color: #fbc02d; }
 		</style>
 	</head>
-	<body>
+	<body class="<?= $theme ?> <?= $font ?>">
 	
 		<div class="container">
         <h1>Turn Your Goals Into Achievements</h1>

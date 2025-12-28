@@ -1,14 +1,25 @@
+<?php
+include "config.php";
+?>
+
+<?php
+session_start();
+if (isset($_SESSION['message'])) {
+    echo "<div class='success-msg'>".$_SESSION['message']."</div>";
+    unset($_SESSION['message']);
+}
+?>
 <!DOCTYPE html>
 <html>
-	<head>
+	<head >
 		<meta charset="utf-8">
 		<title>Lists</title>
+		<link rel="stylesheet" href="style.css">
 		<style type="text/css">
 			body { 
 				display: flex; 
 				flex-direction: column; 
-				align-items: center; 
-				background: #f9f9f9; 
+				align-items: center;  
 				padding-top: 50px; 
 			}/*لحتى اخلي كل العناصر بنص صفحة المتصفح */
 			.header { 
@@ -51,7 +62,7 @@
 
 		</style>
 	</head>
-	<body>
+	 <body class="<?= $theme ?> <?= $font ?>">
 		
 		<div class="header">
 			<h1>Focus Board</h1>
