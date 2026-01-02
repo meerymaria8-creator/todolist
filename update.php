@@ -42,17 +42,14 @@ include "config.php";
 	<body class="<?= $theme ?> <?= $font ?>">
 		<?php
 		require "Database.php";
-
-		// تأكد من وجود id في الرابط
+		// اتاكد من الاidفي لurl 
 		if (isset($_GET['id'])) {
 			$id = $_GET['id'];
 
-			// جلب بيانات المهمة من قاعدة البيانات
+			//اجيب البيانات عن هذا الid
 			$result = mysqli_query($connect, "SELECT * FROM tasks WHERE id=$id");
 			$task = mysqli_fetch_assoc($result);
-
 			if (!$task) {
-				// إذا ما موجودة المهمة
 				die("Task not found!");
 			}
 		} else {
@@ -65,9 +62,11 @@ include "config.php";
 			<form method="POST" action="update_action.php">
 			<!---postالقيم ما بتطلع بال urlاكثر امان -->
 				<input type="hidden" name="id" value="<?php echo $task['id']; ?>">
-				
+				<!--لحتى يعرض لي الidللمهمة الي بدي اعدل عليها  وهو هايدين لحتى ما يكون قابل للتعديل-->
 				<input type="text" name="title" value="<?php echo htmlspecialchars( $task['title']); ?>">
-				
+				<!--بيعرض لي عنوان المهمة الي بدي اعدل عليها  بيجيبه من قاعرد البيانات -->
+				<!--htmlspecialchars
+				لحماية الواجهة من إدخال أكواد HTML أو JavaScript ولمنع XSS-->
 				<button class="update-btn" type="submit">Update</button>
 				<!--لما ارسل البيانات تروح لملف الupdate_action.php يعدل الid واسم المهمة هناك-->
 			</form>

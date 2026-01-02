@@ -72,22 +72,19 @@ if (isset($_SESSION['message'])) {
 
 		<?php
 			require "Database.php";
-
-			// التأكد من الاتصال
 			if (!$connect) {
 				die("Connection failed: " . mysqli_connect_error());
 			}
-
-			// تنفيذ الاستعلام
 			$result = mysqli_query($connect, "SELECT * FROM tasks");
 			if (!$result) {
 				die("Query failed: " . mysqli_error($connect));
 			}
 
-			// المرور على الصفوف
 			while ($row = mysqli_fetch_assoc($result)) {
 				$completedClass = ($row['status'] === 'true') ? 'completed-title' : '';
+				//هون بيغير لي شكل الكارد على حسب لو المهمة مكتملة او لا 
 				$toggleText = ($row['status'] === 'true') ? 'Uncomplete' : 'Complete';
+				//هذا بيغير لي النص ال على البوتون كومبليت مش كمبليت حسب حالة المهمة كمان 
 		?>
 
 		

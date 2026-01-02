@@ -19,5 +19,4 @@ if (isset($_COOKIE['theme']) && $_COOKIE['theme'] == "dark") {
 if (isset($_COOKIE['font'])) {
     $font = $_COOKIE['font'];
 }
-//لازم اعرف تفصي هذا الكود شو بيعمل
 ?>

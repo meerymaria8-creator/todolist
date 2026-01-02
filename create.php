@@ -44,7 +44,7 @@ include "config.php";
 			/*add button*/
 		</style>
 	</head>
-	<body <body class="<?= $theme ?> <?= $font ?>">>
+    <body class="<?= $theme ?> <?= $font ?>">
 		<div class="card">
 			<h1>Add "to do"</h1>
 			<form method="POST" action="Store.php">
